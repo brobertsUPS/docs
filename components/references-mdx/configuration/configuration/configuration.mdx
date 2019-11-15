@@ -135,23 +135,27 @@ Environment variables passed to the invoked [Serverless Functions](/docs/v2/serv
 
 ## functions
 
-**Type:** `Object` of function `Object`.
+**Type:** `Object` of key `String` and value `Object`.
 
-**Valid values:** a list of function definitions.
+**Key definition:**
 
-**Function object definition:**
+A [glob](https://github.com/isaacs/node-glob#glob-primer) pattern that matches the paths of the Serverless Functions you would like to customize (like `api/*.js` or `api/test.js`).
+
+**Value definition:**
 
 - `runtime` (optional): The npm package name of a [Runtime](/docs/runtimes), including its version.
-- `memory` (optional): A integer defining the memory your serverless function should be provided with (between `128` and `3008`, in steps of `64`).
-- `maxDuration` (optional): A integer defining how long your serverless function should be allowed to run on every request (between `1` and the maximum limit of your plan, as mentioned below).
+- `memory` (optional): An integer defining the memory your Serverless Function should be provided with (between `128` and `3008`, in intervals of `64`).
+- `maxDuration` (optional): An integer defining how long your Serverless Function should be allowed to run on every request in seconds (between `1` and the maximum limit of your plan, as mentioned below).
+- `includeFiles` (optional): A [glob](https://github.com/isaacs/node-glob#glob-primer) pattern to match files that should be included in your Serverless Function. If you’re using a Community Runtime, the behavior might vary. Please consult its documentation for more details.
+- `excludeFiles` (optional): A [glob](https://github.com/isaacs/node-glob#glob-primer) pattern to match files that should be excluded from your Serverless Function. If you’re using a Community Runtime, the behavior might vary. Please consult its documentation for more details.
 
 **Description:**
 
-By default, no configuration is needed to deploy serverless functions to ZEIT Now.
+By default, no configuration is needed to deploy Serverless Functions to ZEIT Now.
 
-For all [officially supported runtimes](/docs/v2/serverless-functions/supported-languages/), the only requirement is creating a `api` directory and placing your serverless functions inside.
+For all [officially supported runtimes](/docs/v2/serverless-functions/supported-languages/), the only requirement is to create an `api` directory at the root of your project directory, placing your Serverless Functions inside.
 
-When deployed, each serverless function receives the following properties:
+When deployed, each Serverless Function receives the following properties:
 
 - **Memory:** 1024 MB (1 GB)
 - **Maximum Execution Duration:** 10s (Free), 60s (Pro), 600s (Business), or 900s (Enterprise)
@@ -179,7 +183,7 @@ In order to use a runtime that is not [officially supported](/docs/v2/serverless
   }
 }`}</Code>
 
-In the example above, the `api/test.php` serverless function does use one of the [officially supported runtimes](/docs/v2/serverless-functions/supported-languages/). In turn, a `runtime` property was added in order to invoke the [now-php](https://www.npmjs.com/package/now-php) community runtime.
+In the example above, the `api/test.php` Serverless Function does not use one of the [officially supported runtimes](/docs/v2/serverless-functions/supported-languages/). In turn, a `runtime` property was added in order to invoke the [now-php](https://www.npmjs.com/package/now-php) community runtime.
 
 For more information on Runtimes, see the documentation:
 
